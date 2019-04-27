@@ -38,7 +38,7 @@ VOLUME /home/steam/steamcmd
 
 # Set Entrypoint; Technically 2 steps: 1. Update server, 2. Start server
 ENTRYPOINT ./home/steam/steamcmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/l4d2 +app_update 222860 +quit && \
-        ./home/steam/l4d2/srcds_run Port=27015
+        ./home/steam/l4d2/srcds_run -ip 0.0.0.0 -port 27015
 
 # Expose ports
 EXPOSE 27015/udp
