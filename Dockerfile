@@ -1,6 +1,4 @@
 FROM debian:stretch-slim
-LABEL maintainer="walentinlamonos@gmail.com"
-
 
 # Install, update & upgrade packages
 # Create user for the server
@@ -23,16 +21,18 @@ RUN set -x \
 		&& wget -qO- 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz' | tar zxf -" \
         && apt-get clean autoclean \
         && apt-get autoremove -y \
-        && rm -rf /var/lib/{apt,dpkg,cache,log}/ \
-	&& ./home/steam/steamcmd/steamcmd.sh \
+        && rm -rf /var/lib/{apt,dpkg,cache,log}/
+
+# Switch to user steam
+USER steam
+
+# Install L4d2 server
+RUN set -x \
+ ./home/steam/steamcmd/steamcmd.sh \
         +login anonymous \
         +force_install_dir /home/steam/l4d2 \
         +app_update 222860 validate \
         +quit
-
-
-# Switch to user steam
-USER steam
 
 VOLUME /home/steam/steamcmd
 
