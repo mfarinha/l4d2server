@@ -41,8 +41,5 @@ ENTRYPOINT ./home/steam/steamcmd/steamcmd.sh +login anonymous +force_install_dir
         ./home/steam/l4d2/srcds_run Port=27015
 
 # Expose ports
-EXPOSE 27015
-
-
-
-
+EXPOSE 27015/udp
+EXPOSE 27015/tcp
