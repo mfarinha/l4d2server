@@ -36,11 +36,9 @@ RUN set -x \
 
 VOLUME /home/steam/steamcmd
 
-COPY server.cfg /home/steam/l4d2/left4dead2/cfg/ 
-
 # Set Entrypoint; Technically 2 steps: 1. Update server, 2. Start server
 ENTRYPOINT ./home/steam/steamcmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/l4d2 +app_update 222860 +quit && \
         ./home/steam/l4d2/srcds_run -ip 0.0.0.0 -exec server.cfg
 
 # Expose ports
-EXPOSE 0.0.0.0:27015:27015/udp  27015/tcp
+EXPOSE 0.0.0.0:27015:27015/udp 27015/tcp
